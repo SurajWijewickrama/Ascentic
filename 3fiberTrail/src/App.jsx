@@ -1,6 +1,6 @@
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 
 import {
   OrbitControls,
@@ -9,26 +9,43 @@ import {
   Stats,
   Shadow,
   KeyboardControls,
+  useCamera,
 } from "@react-three/drei";
 import { useControls } from "leva";
 import { Car } from "./components/Car";
 import { House } from "./components/House";
+import { Dancing_man } from "./components/Dancing_man";
 
 function App() {
   const { color, carColor } = useControls({
     color: "#101622",
     carColor: "#000000",
   });
-
+  const [drive, setDrive] = useState(false);
+  const handleDriveClick = () => {
+    setDrive(!drive);
+    console.log("h");
+  };
   return (
     <div className="container" style={{ background: color }}>
-      <div className="absolute bg-white bg-opacity-50 top-10 left-10 p-4">
+      <div className="absolute flex bg-white bg-opacity-50 top-10 left-10 p-4 z-0">
         <h1>
           use A W S D to move around and Q E to do flips, click on the car to go
           turbo boost
         </h1>
       </div>
-      <Canvas shadows camera={{ position: [4, 0, -12], fov: 12 }}>
+      <div className="m-20">
+        <button
+          className="hover:opacity-100 hover:bg-black opacity-80 bg-orange-400 z-10"
+          onClick={handleDriveClick}
+        >
+          {drive ? "Get Out" : "Drive"}
+        </button>
+      </div>
+      <Canvas
+        shadows
+        camera={{ position: [4, 0, -12], fov: 12, makeDefault: !drive }}
+      >
         <Stage
           intensity={0.2}
           environment="sunset"
@@ -50,8 +67,15 @@ function App() {
           <mesh position={[0, -2, 0]}>
             <meshStandardMaterial color={"aquamarine"} />
           </mesh>
-          <Car carColor={carColor} position={[5, 2, 3]} castShadows />
-          <House position={[0, 0, 0]} castShadows />
+
+          <Car
+            carColor={carColor}
+            position={[5, 2, 3]}
+            drive={drive}
+            castShadows
+          />
+          <Dancing_man position={[0, 0, 5]} castShadows />
+          <House position={[0, 0, 0]} />
           {/* <Lighthouse /> */}
           {/* <Ocean position={[0, -5, 0]} /> */}
           <SoftShadows size={10} focus={2} />
@@ -65,6 +89,9 @@ function App() {
 
         <OrbitControls
           makeDefault
+          enableRotate={!drive}
+          enablePan={!drive}
+          enableZoom={!drive}
           quaternion={[1, 69, 5, 1]}
           // minPolarAngle={Map.PI / 2}
           // maxPolarAngle={Map.PI / 2}

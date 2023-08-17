@@ -82,6 +82,7 @@ export function Car(props) {
                         name="Cube004_Material002_0"
                         geometry={nodes.Cube004_Material002_0.geometry}
                         material={materials["Material.002"]}
+                        castShadows
                       />
                     </group>
                     <group
@@ -94,6 +95,7 @@ export function Car(props) {
                         name="Cube005_Material001_0"
                         geometry={nodes.Cube005_Material001_0.geometry}
                         material={materials["Material.006"]}
+                        castShadows
                       />
                     </group>
                     <CarBody
