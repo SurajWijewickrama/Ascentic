@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.2.4 car.glb
 import { Float, useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { useRef, useState } from "react";
-import useKeyboard from "../useKeyboard,jsx";
+import useKeyboard from "../../useKeyboard";
 import CarBody from "./CarBody";
 import Wheels from "./wheels";
 
