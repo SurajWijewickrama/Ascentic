@@ -26,7 +26,6 @@ function CanvasComponent() {
       >
         <Stage
           intensity={0.2}
-          environment="sunset"
           shadows={{
             type: "accumlative",
             color,
