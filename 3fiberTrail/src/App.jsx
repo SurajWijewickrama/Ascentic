@@ -1,20 +1,17 @@
-import "./App.css";
 import { Canvas } from "@react-three/fiber";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
+import "./App.css";
 
 import {
   OrbitControls,
+  Shadow,
   SoftShadows,
   Stage,
   Stats,
-  Shadow,
-  KeyboardControls,
-  useCamera,
 } from "@react-three/drei";
 import { useControls } from "leva";
 import { Car } from "./components/Car";
 import { House } from "./components/House";
-import { Dancing_man } from "./components/Dancing_man";
 
 function App() {
   const { color, carColor } = useControls({
@@ -74,7 +71,6 @@ function App() {
             drive={drive}
             castShadows
           />
-          <Dancing_man position={[0, 0, 5]} castShadows />
           <House position={[0, 0, 0]} />
           {/* <Lighthouse /> */}
           {/* <Ocean position={[0, -5, 0]} /> */}
