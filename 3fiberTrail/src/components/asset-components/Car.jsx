@@ -4,9 +4,7 @@ Command: npx gltfjsx@6.2.4 car.glb
 */
 
 import { Float, useAnimations, useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
 import React, { useRef, useState } from "react";
-import useKeyboard from "../../useKeyboard";
 import CarBody from "./CarBody";
 import Wheels from "./wheels";
 
@@ -14,39 +12,15 @@ const speed = 2;
 export function Car(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/models/car.glb");
-
+  console.log("ji");
   const { action } = useAnimations(animations, group);
   const [speed, setSpeed] = useState(3.5);
-  const [rSpeed, setRSpeed] = useState(3.5);
 
-  const keyMap = useKeyboard();
   const car = useRef();
-
-  useFrame((_, delta) => {
-    // keyMap["KeyE"] && (car.current.rotation.x -= speed * delta);
-    // keyMap["KeyQ"] && (car.current.rotation.x += speed * delta);
-    keyMap["KeyD"] && (car.current.rotation.y -= rSpeed * delta);
-    keyMap["KeyA"] && (car.current.rotation.y += rSpeed * delta);
-    keyMap["KeyW"] &&
-      (car.current.position.z +=
-        Math.cos(car.current.rotation.y) * speed * delta) &&
-      (car.current.position.x +=
-        Math.sin(car.current.rotation.y) * speed * delta);
-    keyMap["KeyS"] &&
-      (car.current.position.z -=
-        Math.cos(car.current.rotation.y) * speed * delta) &&
-      (car.current.position.x -=
-        Math.sin(car.current.rotation.y) * speed * delta);
-  });
 
   return (
     <Float speed={1} floatIntensity={0} floatingRange={[1, 2]}>
-      <group
-        ref={car}
-        {...props}
-        dispose={null}
-        onClick={() => (speed < 10 ? setSpeed(50) : setSpeed(3.5))}
-      >
+      <group ref={car} {...props} dispose={null}>
         <group name="Scene">
           <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
             <group
