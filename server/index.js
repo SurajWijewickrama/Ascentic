@@ -1,8 +1,14 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const corsOptions = {
+  origin: "https://hoverspace-production.up.railway.app",
+  methods: ["GET", "POST"],
+  credentials: true,
+  exposedHeaders: ["Content-Length"],
+};
 
-app.use(cors("*"));
+app.use(cors(corsOptions));
 const http = require("http");
 
 const { Server } = require("socket.io");
