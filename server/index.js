@@ -9,6 +9,11 @@ server.listen(3001, () => {
   console.log("Server is running on port 3001");
 });
 
+app.get("/",(req,res)=>{
+  res.send("Wohoo.. Our server is live now");
+});
+
+
 const players = {};
 const speed = 0.5;
 io.on("connection", (socket) => {
