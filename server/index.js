@@ -5,7 +5,9 @@ const server = http.createServer(app);
 
 const io = require("socket.io")(server,{transports:["websockets"]});
 
-server.listen(3001, () => {
+const PORT = process.env.PORT || 3001;
+
+server.listen(PORT, () => {
   console.log("Server is running on port 3001");
 });
 
