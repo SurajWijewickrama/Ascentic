@@ -1,24 +1,10 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
-
-app.use(cors());
 const http = require("http");
-
-const { Server } = require("socket.io");
-
 const server = http.createServer(app);
 
-server.prependListener("request", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-});
+const io = require("socket.io")(server);
 
-const io = new Server(server, {
-  cors: {
-    origin: ["http://localhost:5173", "https://hoverspace.vercel.app/"],
-    methods: ["GET", "POST"],
-  },
-});
 
 const players = {};
 const speed = 0.5;
@@ -54,6 +40,7 @@ io.on("connection", (socket) => {
       case "KeyD":
         car.rotation[1] -= speed * 0.05;
     }
+    
   });
 
   socket.on("colorUpdated", (color) => {
@@ -70,6 +57,6 @@ setInterval(() => {
   io.emit("players", players);
 }, 15);
 
-server.listen(3000, () => {
+server.listen(3001, () => {
   console.log("Server is running on port 3001");
 });
