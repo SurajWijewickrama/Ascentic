@@ -5,6 +5,9 @@ const server = http.createServer(app);
 
 const io = require("socket.io")(server);
 
+server.listen(3001, () => {
+  console.log("Server is running on port 3001");
+});
 
 const players = {};
 const speed = 0.5;
@@ -57,6 +60,4 @@ setInterval(() => {
   io.emit("players", players);
 }, 15);
 
-server.listen(3001, () => {
-  console.log("Server is running on port 3001");
-});
+
