@@ -3,7 +3,7 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 
-const io = require("socket.io")(server);
+const io = require("socket.io")(server,{transports:["websockets"]});
 
 server.listen(3001, () => {
   console.log("Server is running on port 3001");
