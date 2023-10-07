@@ -1,10 +1,5 @@
 import * as io from "socket.io-client";
 
-const socket = io("https://hoverspace-server-production.up.railway.app/", {
-  withCredentials: true,
-  extraHeaders: {
-    "my-custom-header": "abcd"
-  }
-});
+const socket = io.connect("https://hoverspace-server-production.up.railway.app/");
 
 export default socket;
